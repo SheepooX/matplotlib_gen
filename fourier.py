@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import d2
+from simplifier import *
 import numpy as np
 
-d2.init()
+sim = Simplifier()
 
 step = 0.01
 
@@ -27,8 +27,9 @@ for fq in fqs:
     fyr.append(x_avg)
     fyi.append(y_avg)
 
-d2.ax[0][0].plot(fqs, fyr, label='real', linewidth=1)
-d2.ax[0][0].plot(fqs, fyi, label='imag', linewidth=1)
+sim.plot(fqs, fyr, {'label': 'real', 'linewidth': 1})
+sim.plot(fqs, fyi, {'label': 'imag', 'linewidth': 1})
 
-d2.finish()
+sim.show_labels()
+sim.save_fig()
 

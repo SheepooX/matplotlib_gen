@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-import d2
-from matplotlib import pyplot as plt
+from d2 import *
 import numpy as np
 import math
 
@@ -21,25 +20,28 @@ func = [
             ],
         ]
 
-d2.init(rows=2, cols=4, width=28, height=21)
+sim = Simplifier(rows=2, cols=4, width=28, height=21)
+
 lim = 10
 x = np.arange(1 + step, lim, step)
 x1 = [0, lim]
 y1 = [0, 0]
 x2 = [0, 0]
 y2 = [0, lim]
+
 for i in range(2):
     for j in range(4):
         y = [func[i][j][0](x1) for x1 in x]
-        d2.plot(x, y, row=i, col=j, opts={'label': func[i][j][1]})
-        d2.plot(x1, y1, row=i, col=j, opts={'color': 'w'})
-        d2.plot(x2, y2, row=i, col=j, opts={'color': 'w'})
+        sim.plot(x, y, row=i, col=j, opts={'label': func[i][j][1]})
+        sim.plot(x1, y1, row=i, col=j, opts={'color': 'w'})
+        sim.plot(x2, y2, row=i, col=j, opts={'color': 'w'})
 
-for a in d2.ax[0]:
-    a.axis('equal')
+for axis in sim.axes[0]:
+    axis.axis('equal')
 
-for a in d2.ax[1][:1]:
-    a.axis('equal')
+for axis in sim.axes[1][:1]:
+    axis.axis('equal')
 
-d2.finish()
+sim.show_labels()
+sim.save_fig()
 

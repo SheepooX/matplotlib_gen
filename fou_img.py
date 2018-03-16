@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
-import d2
-from matplotlib import pyplot as plt
+from simplifier import *
 import numpy as np
 
-d2.init()
+sim = Simplifier()
 
 step = 0.01
 
@@ -23,10 +22,11 @@ for f in freqs[1:]:
 for wf in wfs:
     ome = 2 * np.pi * wf
     shape = snd * (np.cos(ome * x) + 1j * np.sin(ome * x))
-    d2.clear_axis()
+    sim.clear_axes()
     lbl = "f:{};wf:{}".format(fq_str, wf)
-    d2.ax[0][0].plot(shape.real, shape.imag, label=lbl, linewidth=1)
-    d2.scale_axis()
-    d2.finish("f:{},wf:{}".format(fq_str, wf))
+    sim.plot(shape.real, shape.imag, {'label': lbl, 'linewidth': 1})
+    sim.scale_axes()
+    sim.show_labels()
+    sim.save_fig("f:{},wf:{}".format(fq_str, wf))
 
 
