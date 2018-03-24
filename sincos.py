@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 
-import d2
+from simplifier import *
 import numpy as np
 
-d2.init()
+sim = Simplifier(width=10, height=4)
 
 x = np.arange(0, 6 * np.pi + 0.001 , 0.001)
 peri = 2 * np.pi
 si = np.e ** (2 * np.pi * 1j * x * (1 / peri))
 
-d2.plot(si.real, si.imag, opts={'label': 'circle'})
-d2.plot(x, si.real, opts={'label': 'cos x'})
-d2.plot(x, si.imag, opts={'label': 'sin  x'})
+sim.plot(si.real, si.imag, opts={'label': 'circle'})
+sim.plot(x, si.real, opts={'label': 'cos x'})
+sim.plot(x, si.imag, opts={'label': 'sin  x'})
 
-d2.axis_scale()
-d2.finish()
+sim.scale_axes()
+sim.save_fig()
 
